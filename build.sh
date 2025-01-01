@@ -21,7 +21,13 @@ rpm-ostree install blivet-gui alacarte waydroid gns3-server
 # rpm-ostree install vlc
 
 # this would install a package from a other repo
-rpm-ostree install VirtualBox
+rpm-ostree install VirtualBox || virtualbox_failed=1
+
+if [ ${virtualbox_failed:-0} -eq 1 ]; then
+    echo "Failed to install VirtualBox. retry to build akmods"
+    akmodsbuild /usr/src/akmods/VirtualBox-kmod.latest
+    vboxconfig
+fi
 
 # configure pacakage
 usermod -aG vboxusers $USER
