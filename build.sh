@@ -23,7 +23,7 @@ rpm-ostree install blivet-gui alacarte waydroid gns3-server
 # this would install a package from a other repo
 rpm-ostree install VirtualBox || virtualbox_failed=1
 
-if [ ${virtualbox_failed:-0} -eq 1 ]; then
+if [ "$virtualbox_failed" -eq 1 ]; then
     echo "Failed to install VirtualBox. retry to build akmods"
     akmodsbuild /usr/src/akmods/VirtualBox-kmod.latest
     vboxconfig
