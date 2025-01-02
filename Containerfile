@@ -49,7 +49,6 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
 
 COPY build.sh /tmp/build.sh
-COPY virtualbox.repo /etc/yum.repos.d/virtualbox.repo
 
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
