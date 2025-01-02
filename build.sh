@@ -18,7 +18,7 @@ virtualbox_failed=0
 # this installs a package from fedora repos
 rpm-ostree install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 rpm-ostree install blivet-gui alacarte waydroid gns3-server VirtualBox
-akmods --force --kernels "${KERNEL}" --kmod VirtualBox || cat /var/cache/akmods/VirtualBox/*.log 
+akmods --force --kernels "${KERNEL}" --kmod VirtualBox -- --nogpgcheck|| cat /var/cache/akmods/VirtualBox/*.log 
 modinfo /usr/lib/modules/${KERNEL}/extra/VirtualBox/{vboxdrv,vboxnetadp,vboxnetflt}.ko.xz > /dev/null \
 || (find /var/cache/akmods/VirtualBox/ -name \*.log -print -exec cat {} \; && exit 1)
 
