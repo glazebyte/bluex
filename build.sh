@@ -3,7 +3,6 @@
 set -ouex pipefail
 
 RELEASE="$(rpm -E %fedora)"
-ARCH="$(rpm -E '%_arch')"
 KERNEL="$(rpm -q kernel --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}')"
 
 virtualbox_failed=0
