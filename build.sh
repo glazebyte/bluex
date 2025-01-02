@@ -31,9 +31,6 @@ if [ "$virtualbox_failed" -eq 1 ]; then
     vboxconfig
 fi
 
-# configure pacakage
-usermod -aG vboxusers $USER
-
 #### Example for enabling a System Unit File
 # systemctl enable podman.socket
 systemctl enable waydroid-container.service
