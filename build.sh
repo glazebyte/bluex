@@ -4,6 +4,8 @@ set -ouex pipefail
 
 RELEASE="$(rpm -E %fedora)"
 
+virtualbox_failed=0
+
 
 ### Install packages
 
