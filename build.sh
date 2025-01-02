@@ -17,8 +17,7 @@ virtualbox_failed=0
 
 # this installs a package from fedora repos
 rpm-ostree install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-rpm-ostree install blivet-gui alacarte waydroid gns3-server VirtualBox
-rpm-ostree install /tmp/rpms/kmods/kmod-VirtualBox*.rpm
+rpm-ostree install blivet-gui appeditor waydroid gns3-server VirtualBox /tmp/rpms/kmods/kmod-VirtualBox*.rpm
 
 
 # this would install a package from rpmfusion
