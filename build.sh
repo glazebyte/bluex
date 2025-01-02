@@ -18,13 +18,10 @@ virtualbox_failed=0
 # this installs a package from fedora repos
 rpm-ostree install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 rpm-ostree install blivet-gui alacarte waydroid gns3-server VirtualBox
-akmods --force --kernels "${KERNEL}" --kmod VirtualBox|| virtualbox_failed=1
-if [ true ]; then
-    echo "Failed to build VirtualBox kernel modules"
-    find /var/cache/akmods/VirtualBox/ -name \*.log -print -exec cat {} \;
-    exit 1
-fi
-modinfo /usr/lib/modules/${KERNEL}/extra/VirtualBox/{vboxdrv,vboxnetadp,vboxnetflt}.ko.xz > /dev/null 
+akmods --force --kernels "${KERNEL}" --kmod VirtualBox|| rpm-ostree install /tmp/akmodsbuild.*/RPMS/x86_64/kmod-VirtualBox-*rpm
+
+modinfo /usr/lib/modules/${KERNEL}/extra/VirtualBox/{vboxdrv,vboxnetadp,vboxnetflt}.ko.xz > /dev/null \
+|| (find /var/cache/akmods/VirtualBox/ -name \*.log -print -exec cat {} \; && exit 1)
 
 
 # this would install a package from rpmfusion
