@@ -2,8 +2,9 @@
 
 set -ouex pipefail
 
-RELEASE="$(rpm -E %fedora)"
-KERNEL="$(rpm -q kernel --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}')"
+mkdir /var/opt
+mkdir /usr/lib/opt/microsoft
+ln -s /usr/lib/opt/microsoft /var/opt/microsoft
 
 ### Install packages
 
@@ -12,9 +13,11 @@ KERNEL="$(rpm -q kernel --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}')"
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 curl https://packages.microsoft.com/yumrepos/edge/config.repo -o /etc/yum.repos.d/microsoft-edge.repo
+
 # this installs a package from fedora repos
 rpm-ostree install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-rpm-ostree install blivet-gui appeditor waydroid gns3-server VirtualBox microsoft-edge-stable /tmp/rpms/kmods/kmod-VirtualBox*.rpm
+rpm-ostree install blivet-gui appeditor waydroid gns3-server VirtualBox /tmp/rpms/kmods/kmod-VirtualBox*.rpm
+rpm-ostree install microsoft-edge-stable || true
 
 
 # this would install a package from rpmfusion
