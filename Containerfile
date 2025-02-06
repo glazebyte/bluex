@@ -50,7 +50,7 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 
 COPY build.sh /tmp/build.sh
 
-COPY --from=ghcr.io/ublue-os/akmods-extra:coreos-stable-41-6.11.8-300.fc41.x86_64 /rpms/ /tmp/rpms
+COPY --from=ghcr.io/ublue-os/akmods-extra:coreos-stable-41 /rpms/ /tmp/rpms
 RUN find /tmp/rpms
 
 RUN mkdir -p /var/lib/alternatives && \
